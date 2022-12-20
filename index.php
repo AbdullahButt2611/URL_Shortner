@@ -129,5 +129,8 @@
             <button>Save</button>
         </form>
     </div>
+
+
+    <script src="script.js"></script>
 </body>
 </html>
