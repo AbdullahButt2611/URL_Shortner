@@ -14,7 +14,7 @@
 <body>
     <div class="wrapper">
         <form action="#">
-            <input type="text" name="full-url" placeholder="Enter or paste a long url" required>
+            <input type="text" name="full_url" placeholder="Enter or paste a long url" required>
             <i class="url-icon uil uil-link"></i>
             <button>Shorten</button>
         </form>
@@ -124,7 +124,7 @@
         <div class="info-box">Your short link is ready. You can also edit your short link now but can't edit once saved.</div>
         <form action="#">
             <label for="">Edit your shorten url</label>
-            <input type="text" value="example.com/xyz234" spellcheck="false">
+            <input type="text" value="" spellcheck="false">
             <i class="copy-icon uil uil-copy"></i>
             <button>Save</button>
         </form>
