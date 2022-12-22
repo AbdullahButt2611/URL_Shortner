@@ -1,3 +1,24 @@
+<!-- Redirecting User to the original link using shorter link -->
+<?php
+    include "php/config.php";
+    if(isset($_GET['u']))
+    {
+        $u = mysqli_real_escape_string($conn, $_GET['u']);
+
+        // Getting the full URL of that short url 
+        $sql = mysqli_query($conn, "SELECT full_url FROM url WHERE shorten_url = '{$u}'");
+        if(mysqli_num_rows($sql) > 0)
+        {
+            // Redirecting User
+            $full_url = mysqli_fetch_assoc($sql);
+            echo $full_url['full_url'];
+            header("Location:".$full_url['full_url']);
+        }
+    }
+    
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,103 +40,63 @@
             <button>Shorten</button>
         </form>
 
-        <div class="count">
-            <span>Total Links: <span>10</span> and Total Clicks: <span>140</span></span>
-            <a href="#">Clear All</a>
+        <?php
+
+        $sql2 = mysqli_query($conn, "SELECT * FROM url ORDER BY id DESC");
+        if(mysqli_num_rows($sql2) > 0)
+        {
+            ?>
+            <div class="count">
+                <span>Total Links: <span>10</span> and Total Clicks: <span>140</span></span>
+                <a href="#">Clear All</a>
+            </div>
+
+            <div class="urls-area">
+                <div class="title">
+                    <li>Shorten URL</li>
+                    <li>Original URL</li>
+                    <li>Clicks</li>
+                    <li>Actions</li>
+                </div>
+                <?php
+                while($row = mysqli_fetch_assoc($sql2))
+                {
+                    ?>
+                    <div class="data">
+                        <li>
+                            <a href="#">
+                                <?php
+                                    if('localhost/url?u='.strlen($row['shorten_url']) > 50){
+                                        echo "localhost/url?u=" . substr($row['shorten_url'], 0, 50).'...';
+                                    } 
+                                    else
+                                    {
+                                        echo "localhost/url?u=".$row['shorten_url'];
+                                    }
+                                ?>
+                            </a>
+                        </li>
+
+                        <li>
+                                <?php
+                                    if(strlen($row['full_url']) > 65){
+                                        echo substr($row['full_url'], 0, 65).'...';
+                                    } 
+                                    else
+                                    {
+                                        echo $row['full_url'];
+                                    }
+                                ?>
+                        </li>
+                        <li><?php echo $row['clicks'] ?></li>
+                        <li><a href="#">Delete</a></li>
+                    </div>
+                    <?php
+                }
+        }
+        ?>
         </div>
 
-        <div class="urls-area">
-            <div class="title">
-                <li>Shorten URL</li>
-                <li>Original URL</li>
-                <li>Clicks</li>
-                <li>Actions</li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class="data">
-                <li><a href="#">example.com/xyz234</a></li>
-                <li>https://project-d-isplayer.vercel.app/</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-        </div>
     </div>
 
     <div class="blur-effect"></div>
