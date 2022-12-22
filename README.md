@@ -10,7 +10,7 @@
 ### Description
 <p align="justify">
  It creates a short url of your long url which is a maximum of 5 characters. URL shortener is a service that helps take longer URLs (which can be over a hundred characters long) and transform them into manageable links that rarely exceed 20 characters. The user simply have to enter the URL into the textbox provided. Once the text is inserted, a button will appear. The user can then simply click on the button to generate the URL. If the URL inserted is not a validURL the system will prompt an error message about the URL. Also the system will keep track of the number of clicks on the links. The user will also be provided with the list of all the links which he/she can delete by simply clicking on the delete button.<br>
- Initially there will be no button, but the button will appear once the text is inserted, also the border and the textbox will change its color to show the active starte of the system. If the URL already exists then the system will simply stop the system processing and will prompt the user to change the URL because the current already exists.
+ Initially there will be no button, but the button will appear once the text is inserted, also the border and the textbox will change its color to show the active starte of the system. If the URL already exists then the system will simply stop the system processing and will prompt the user to change the URL because the current already exists. <br>
  The app simply asks the user to insert certain kind of URL. Once th URL is inserted, then the validation is implemented, whether the inserted URL is valid or not or is it empty. Once the URL is validated, then a series of random characters is generated at the backend that is going to be used as a URL.
 </p>
 
