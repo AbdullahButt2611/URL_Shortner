@@ -1,12 +1,17 @@
 <!-- Redirecting User to the original link using shorter link -->
 <?php
     include "php/config.php";
-    if(isset($_GET['u']))
+    $new_url = "";
+    if(isset($_GET))
     {
-        $u = mysqli_real_escape_string($conn, $_GET['u']);
+        foreach($_GET as $key=>$val)
+        {
+            $u = mysqli_real_escape_string($conn, $key);
+            $new_url = str_replace('/', '', $u);            //Removing / sign from url
+        }
 
         // Getting the full URL of that short url 
-        $sql = mysqli_query($conn, "SELECT full_url FROM url WHERE shorten_url = '{$u}'");
+        $sql = mysqli_query($conn, "SELECT full_url FROM url WHERE shorten_url = '{$new_url}'");
         if(mysqli_num_rows($sql) > 0)
         {
             // Redirecting User
@@ -64,7 +69,7 @@
                     ?>
                     <div class="data">
                         <li>
-                            <a href="#">
+                            <a href="http://localhost<?php echo $row['shorten_url'] ?>" target="_blank">
                                 <?php
                                     if('localhost/url?u='.strlen($row['shorten_url']) > 50){
                                         echo "localhost/url?u=" . substr($row['shorten_url'], 0, 50).'...';

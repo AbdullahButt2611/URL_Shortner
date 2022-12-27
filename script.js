@@ -4,7 +4,8 @@ fullURL = form.querySelector("input"),
 shortenBtn = form.querySelector("button"),
 blurEffect = document.querySelector(".blur-effect"),
 popupBox = document.querySelector(".popup-box"),
-shortenURL = popupBox.querySelector("input");
+shortenURL = popupBox.querySelector("input"),
+saveBtn = popupBox.querySelector("button");
 
 
 form.onsubmit = (e) => {
@@ -28,8 +29,14 @@ shortenBtn.onclick = ()=>{
                 blurEffect.style.display = "block";
                 popupBox.classList.add("show");
 
-                let domain = "localhost/url?u=";
+                let domain = "localhost/URL_Shortner/";
                 shortenURL.value = domain + data;
+
+
+                // Working on the Save Button
+                saveBtn.onclick = () =>{
+                    location.reload();              // Reload the Current Page
+                };
 
             }
             else{
