@@ -68,7 +68,7 @@
                 ?>
 
                 <span>Total Links: <span><?php echo end($res); ?></span> and Total Clicks: <span><?php echo $total; ?></span></span>
-                <a href="#">Clear All</a>
+                <a href="php/delete.php?delete=all">Clear All</a>
             </div>
 
             <div class="urls-area">
@@ -123,7 +123,7 @@
 
     <div class="popup-box">
         <div class="info-box">Your short link is ready. You can also edit your short link now but can't edit once saved.</div>
-        <form action="#">
+        <form action="">
             <label for="">Edit your shorten url</label>
             <input type="text" value="" spellcheck="false">
             <i class="copy-icon uil uil-copy"></i>
