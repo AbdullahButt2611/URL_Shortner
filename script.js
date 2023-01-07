@@ -4,9 +4,10 @@ fullURL = form.querySelector("input"),
 shortenBtn = form.querySelector("button"),
 blurEffect = document.querySelector(".blur-effect"),
 popupBox = document.querySelector(".popup-box"),
+form2 = popupBox.querySelector("form"),
 shortenURL = popupBox.querySelector("input"),
-saveBtn = popupBox.querySelector("button");
-
+saveBtn = popupBox.querySelector("button"),
+copyBtn = popupBox.querySelector(".copy-icon");
 
 form.onsubmit = (e) => {
 
@@ -32,6 +33,14 @@ shortenBtn.onclick = ()=>{
                 let domain = "localhost/URL_Shortner/";
                 shortenURL.value = domain + data;
 
+                copyBtn.onclick = () => {
+                    shortenURL.select();
+                    document.execCommand("copy");
+                }
+
+                form2.onsubmit = (e) =>{
+                    e.preventDefault();
+                }
 
                 // Working on the Save Button
                 saveBtn.onclick = () =>{

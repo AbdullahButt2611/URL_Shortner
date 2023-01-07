@@ -14,10 +14,13 @@
         $sql = mysqli_query($conn, "SELECT full_url FROM url WHERE shorten_url = '{$new_url}'");
         if(mysqli_num_rows($sql) > 0)
         {
-            // Redirecting User
-            $full_url = mysqli_fetch_assoc($sql);
-            echo $full_url['full_url'];
-            header("Location:".$full_url['full_url']);
+            $count_query = mysqli_query($conn, "UPDATE url SET clicks = clicks + 1 WHERE shorten_url = '{$new_url}' ");
+            if($count_query){
+                // Redirecting User
+                $full_url = mysqli_fetch_assoc($sql);
+                header("Location:".$full_url['full_url']);
+            }
+
         }
     }
     
@@ -52,7 +55,19 @@
         {
             ?>
             <div class="count">
-                <span>Total Links: <span>10</span> and Total Clicks: <span>140</span></span>
+                <?php
+                    $sql3 = mysqli_query($conn, "SELECT COUNT(*) FROM url");
+                    $res = mysqli_fetch_assoc($sql3);
+
+                    $sql4 = mysqli_query($conn, "SELECT clicks FROM url");
+                    $total = 0;
+
+                    while($c = mysqli_fetch_assoc($sql4) ){
+                        $total = $c['clicks'] + $total;
+                    }
+                ?>
+
+                <span>Total Links: <span><?php echo end($res); ?></span> and Total Clicks: <span><?php echo $total; ?></span></span>
                 <a href="#">Clear All</a>
             </div>
 
@@ -69,14 +84,14 @@
                     ?>
                     <div class="data">
                         <li>
-                            <a href="http://localhost<?php echo $row['shorten_url'] ?>" target="_blank">
+                            <a href="http://localhost/URL_Shortner/<?php echo $row['shorten_url'] ?>" target="_blank" target="_blank">
                                 <?php
                                     if('localhost/url?u='.strlen($row['shorten_url']) > 50){
-                                        echo "localhost/url?u=" . substr($row['shorten_url'], 0, 50).'...';
+                                        echo "localhost/URL_Shortner/" . substr($row['shorten_url'], 0, 50).'...';
                                     } 
                                     else
                                     {
-                                        echo "localhost/url?u=".$row['shorten_url'];
+                                        echo "localhost/URL_Shortner/".$row['shorten_url'];
                                     }
                                 ?>
                             </a>
@@ -94,7 +109,7 @@
                                 ?>
                         </li>
                         <li><?php echo $row['clicks'] ?></li>
-                        <li><a href="#">Delete</a></li>
+                        <li><a href="php/delete.php?id=<?php echo $row['shorten_url'] ?>">Delete</a></li>
                     </div>
                     <?php
                 }
