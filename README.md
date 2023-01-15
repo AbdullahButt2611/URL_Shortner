@@ -52,6 +52,7 @@ Follwing resources have been used in maintaining this project:
 
 
 ## Link To Video
+<a href="https://youtu.be/iwmg3oQGvo4">Click Here</a> to get access to the video of the project in running state.
 <br><br>
 
 ## GUI
